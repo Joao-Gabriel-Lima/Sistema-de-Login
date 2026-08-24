@@ -23,7 +23,7 @@ app.post("/login", (req, res) => {
     return u.usuario === req.body.usuario && u.senha === req.body.senha;
   });
   if (usuarioEncontrado) {
-    res.json({ message: "ok" });
+    res.json({ message: "Usuário autenticado com sucesso" });
   } else {
     res.status(401).json({ message: "Usuário ou senha inválidos" });
   }
