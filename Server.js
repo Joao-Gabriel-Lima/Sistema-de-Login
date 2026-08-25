@@ -3,20 +3,21 @@ const fs = require("fs");
 const express = require("express");
 const app = express();
 
-const bycrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 app.use(express.static("public"));
 
 app.use(express.json());
 
 app.post("/cadastro", (req, res) => {
-  const dados = fs.readFileSync("usuarios.json", "utf8");
-  const usuarios = JSON.parse(dados);
-  usuarios.push(req.body);
-  fs.writeFileSync("usuarios.json", JSON.stringify(usuarios));
+  bcrypt.hash(req.body.senha, 10, function (err, hash) {
+    const dados = fs.readFileSync("usuarios.json", "utf8");
+    const usuarios = JSON.parse(dados);
+    usuarios.push({ usuario: req.body.usuario, senha: hash });
+    fs.writeFileSync("usuarios.json", JSON.stringify(usuarios));
 
   res.json({ message: "ok" });
-});
+})});
 
 app.post("/login", (req, res) => {
   const dados = fs.readFileSync("usuarios.json", "utf8");
