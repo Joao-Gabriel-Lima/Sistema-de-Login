@@ -13,7 +13,7 @@ app.post("/cadastro", (req, res) => {
   usuarios.push(req.body);
   fs.writeFileSync("usuarios.json", JSON.stringify(usuarios));
 
-  res.json({ message: "ok" });
+  res.json({ message: "Usuário cadastrado com sucesso" });
 });
 
 app.post("/login", (req, res) => {
