@@ -3,6 +3,8 @@ const fs = require("fs");
 const express = require("express");
 const app = express();
 
+const bycrypt = require("bcrypt");
+
 app.use(express.static("public"));
 
 app.use(express.json());
